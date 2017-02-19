@@ -64,4 +64,17 @@ public class OptimizedBoxingLineTest {
         assertEquals("163/46/19/8/55/28/73/7", boxingLine.toString());
     }
 
+    @Test
+    public void test_other_example() throws Exception {
+        BoxingLine boxingLine = new OptimizedBoxingLine(10);
+
+        boxingLine.addElements (1, 6, 3, 8, 4);
+        boxingLine.addElements (1, 6, 8, 9, 5, 2, 5, 7, 7, 3, 8, 3);
+        boxingLine.close();
+
+        assertEquals(9, boxingLine.boxesProducedCount());
+        assertEquals(asList("163", "46", "19", "8", "55", "28", "73", "73", "8"), boxingLine.producedBoxes ());
+        assertEquals("163/46/19/8/55/28/73/73/8", boxingLine.toString());
+    }
+
 }
