@@ -54,6 +54,14 @@ public class OptimizedBoxingLine implements BoxingLine {
                     box.add(biggestInBox);
                     box.add(element);
                     producedBoxes.add(box);
+                    //try to ship waitingElement since it is the biggest now
+                    if (waitingElement != null) {
+                        currentBox.add(waitingElement);
+                        waitingElement = null;
+                        if (currentBox.leftSpace() == 0) {
+                            shipBox();
+                        }
+                    }
                     continue;
                 }
 
@@ -61,8 +69,7 @@ public class OptimizedBoxingLine implements BoxingLine {
                 //element is hence bigger than biggestInBox, so ship it asap
                 if (currentBox.leftSpace() == element) {
                     currentBox.add(element);
-                    producedBoxes.add(currentBox);
-                    currentBox = new Box(boxCapacity);
+                    shipBox();
                     currentBox.add(biggestInBox);
                     continue;
                 }
@@ -76,14 +83,16 @@ public class OptimizedBoxingLine implements BoxingLine {
                 currentBox.add(min(biggestInBox, element));
                 waitingElement = max(biggestInBox, element);
             } else if (currentBox.leftSpace() == 0) {
-                producedBoxes.add(currentBox);
-                currentBox = new Box(boxCapacity);
+                shipBox();
             }
         }
     }
 
     @Override
     public void close() {
+        if (waitingElement != null) {
+            currentBox.add(waitingElement);
+        }
         if (! currentBox.isEmpty ()) {
             producedBoxes.add(currentBox);
         }
@@ -108,6 +117,11 @@ public class OptimizedBoxingLine implements BoxingLine {
             builder.append(box);
         }
         return builder.toString();
+    }
+
+    private void shipBox() {
+        producedBoxes.add(currentBox);
+        currentBox = new Box(boxCapacity);
     }
 
     private Box currentBox;

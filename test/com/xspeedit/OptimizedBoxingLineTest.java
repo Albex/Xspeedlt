@@ -60,8 +60,8 @@ public class OptimizedBoxingLineTest {
         boxingLine.close();
 
         assertEquals(8, boxingLine.boxesProducedCount());
-        assertEquals(asList("163", "46", "19", "8", "55", "8", "73", "27"), boxingLine.producedBoxes ());
-        assertEquals("163/46/19/8/55/8/73/27", boxingLine.toString());
+        assertEquals(asList("163", "46", "19", "8", "55", "28", "73", "7"), boxingLine.producedBoxes ());
+        assertEquals("163/46/19/8/55/28/73/7", boxingLine.toString());
     }
 
 }
