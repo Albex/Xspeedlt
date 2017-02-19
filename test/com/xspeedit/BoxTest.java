@@ -5,8 +5,16 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BoxTest {
+
+    @Test()
+    public void test_box_is_empty() {
+        Box box = new Box(10);
+
+        assertTrue(box.isEmpty());
+    }
 
     @Test()
     public void test_box_can_add_and_contain_an_element() {

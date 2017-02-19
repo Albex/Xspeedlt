@@ -30,6 +30,10 @@ public class Box {
         return contents;
     }
 
+    public boolean isEmpty() {
+        return contents.isEmpty();
+    }
+
     @Override
     public String toString () {
         return contents.stream()

@@ -42,7 +42,9 @@ public class BasicBoxingLine implements BoxingLine {
 
     @Override
     public void close() {
-        producedBoxes.add(currentBox);
+        if (! currentBox.isEmpty()) {
+            producedBoxes.add(currentBox);
+        }
     }
 
     @Override
