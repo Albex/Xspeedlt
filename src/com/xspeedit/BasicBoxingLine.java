@@ -9,17 +9,19 @@ import java.util.stream.Collectors;
 /**
  * First simple algorithm described in the README file.
  */
-public class BasicBoxingLine {
+public class BasicBoxingLine implements BoxingLine {
 
     public BasicBoxingLine() {
         boxCapacity = 10;
         producedBoxes = new LinkedHashSet<>();
     }
 
+    @Override
     public int boxesProducedCount() {
         return producedBoxes.size();
     }
 
+    @Override
     public boolean addElements(int... elements) {
         Box box = new Box(boxCapacity);
         for (int element : elements) {
@@ -39,6 +41,7 @@ public class BasicBoxingLine {
         return true;
     }
 
+    @Override
     public List<String> producedBoxes() {
         return producedBoxes.stream()
                 .map(Box::toString)
