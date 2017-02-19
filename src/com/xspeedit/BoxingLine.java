@@ -6,7 +6,7 @@ public interface BoxingLine {
 
     int boxesProducedCount();
 
-    boolean addElements(int... elements);
+    void addElements(Integer... elements);
 
     void close();
 

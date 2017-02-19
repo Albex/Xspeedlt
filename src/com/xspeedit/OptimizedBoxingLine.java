@@ -26,7 +26,7 @@ public class OptimizedBoxingLine implements BoxingLine {
     }
 
     @Override
-    public void addElements(int... elements) {
+    public void addElements(Integer... elements) {
         for (int element : elements) {
             if (element > 9 || element < 1) {
                 throw new IllegalArgumentException(String.format("at least one element is not of correct size: %s",

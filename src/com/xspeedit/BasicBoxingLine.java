@@ -23,7 +23,7 @@ public class BasicBoxingLine implements BoxingLine {
     }
 
     @Override
-    public boolean addElements(int... elements) {
+    public void addElements(Integer... elements) {
         for (int element : elements) {
             if (element > 9 || element < 1) {
                 throw new IllegalArgumentException(String.format("at least one element is not of correct size: %s",
@@ -36,8 +36,6 @@ public class BasicBoxingLine implements BoxingLine {
                 currentBox.add(element);
             }
         }
-
-        return true;
     }
 
     @Override
