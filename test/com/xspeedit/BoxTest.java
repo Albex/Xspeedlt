@@ -5,9 +5,6 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
-/**
- * Created by alexc on 19/02/2017.
- */
 public class BoxTest {
 
     @Test()
@@ -18,6 +15,7 @@ public class BoxTest {
         box.add(2);
 
         assertEquals(asList(5, 2), box.getContents());
+        assertEquals("52", box.toString());
     }
 
     @Test()
@@ -30,19 +28,23 @@ public class BoxTest {
         assertEquals(3, box.leftSpace());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_box_cant_add_more_than_capacity() {
         Box box = new Box(10);
 
-        box.add(11);
+        boolean added = box.add(11);
+
+        assertFalse(added);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_box_cant_contain_more_than_capacity() {
         Box box = new Box(10);
         box.add(4);
 
-        box.add(7);
+        boolean added = box.add(7);
+
+        assertFalse(added);
     }
 
 }

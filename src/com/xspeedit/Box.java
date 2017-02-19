@@ -3,6 +3,7 @@ package com.xspeedit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Box {
 
@@ -11,14 +12,14 @@ public class Box {
         this.capacity = capacity;
     }
 
-    public void add(int elementSize) {
+    public boolean add(int elementSize) {
         if (elementSize + contentSize > capacity) {
-            throw new IllegalArgumentException(String.format("element too big: space left in the box %s, element size %s",
-                    capacity - contents.size(), elementSize));
+            return false;
         }
 
         contents.add(elementSize);
         contentSize += elementSize;
+        return true;
     }
 
     public int leftSpace() {
@@ -27,6 +28,13 @@ public class Box {
 
     public Collection<Integer> getContents() {
         return contents;
+    }
+
+    @Override
+    public String toString () {
+        return contents.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining());
     }
 
     private int contentSize;
