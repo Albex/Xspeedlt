@@ -38,6 +38,19 @@ public class BoxTest {
     }
 
     @Test
+    public void test_box_remove_biggest() {
+        Box box = new Box(10);
+        box.add(2);
+        box.add(3);
+
+        int biggest = box.removeBiggest();
+
+        assertEquals(3, biggest);
+        assertEquals(asList(2), box.getContents());
+        assertEquals("2", box.toString());
+    }
+
+    @Test
     public void test_box_cant_add_more_than_capacity() {
         Box box = new Box(10);
 

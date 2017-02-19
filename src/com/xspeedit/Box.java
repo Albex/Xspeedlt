@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.max;
+
 public class Box {
 
     public Box(int capacity) {
@@ -20,6 +22,18 @@ public class Box {
         contents.add(elementSize);
         contentSize += elementSize;
         return true;
+    }
+
+    public int removeBiggest() {
+        int biggestIndex = 0;
+        for (int i = 1; i < contents.size(); i++) {
+            if (contents.get(biggestIndex) < contents.get(i)) {
+                biggestIndex = i;
+            }
+        }
+        int biggest = contents.remove(biggestIndex);
+        contentSize -= biggest;
+        return biggest;
     }
 
     public int leftSpace() {
