@@ -3,9 +3,6 @@ package com.xspeedit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.lang.Integer.max;
 
 public class Box {
 
@@ -50,9 +47,11 @@ public class Box {
 
     @Override
     public String toString () {
-        return contents.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining());
+        StringBuilder builder = new StringBuilder();
+        for (Integer content : contents) {
+            builder.append(content);
+        }
+        return builder.toString();
     }
 
     private int contentSize;

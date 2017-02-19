@@ -1,11 +1,12 @@
 package com.xspeedit;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.lang.Integer.max;
-import static java.lang.Integer.min;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * This algorithm tries to optimized the boxes without knowing all the elements but the nearest.
@@ -16,7 +17,7 @@ public class OptimizedBoxingLine implements BoxingLine {
 
     public OptimizedBoxingLine(int boxCapacity) {
         this.boxCapacity = boxCapacity;
-        this.producedBoxes = new ArrayList<>();
+        this.producedBoxes = new LinkedHashSet<>();
         this.currentBox = new Box(boxCapacity);
     }
 
@@ -90,14 +91,23 @@ public class OptimizedBoxingLine implements BoxingLine {
 
     @Override
     public List<String> producedBoxes() {
-        return producedBoxes.stream()
-                .map(Box::toString)
-                .collect(Collectors.toList());
+        List<String> res = new ArrayList<>();
+        for (Box producedBox : producedBoxes) {
+            res.add(producedBox.toString());
+        }
+        return res;
     }
 
     @Override
     public String toString() {
-        return String.join ("/", producedBoxes());
+        StringBuilder builder = new StringBuilder();
+        for (String box : producedBoxes()) {
+            if (! builder.toString().equals("")) {
+                builder.append("/");
+            }
+            builder.append(box);
+        }
+        return builder.toString();
     }
 
     private Box currentBox;
@@ -106,5 +116,5 @@ public class OptimizedBoxingLine implements BoxingLine {
 
     private final int boxCapacity;
 
-    private final ArrayList<Box> producedBoxes;
+    private final Collection<Box> producedBoxes;
 }

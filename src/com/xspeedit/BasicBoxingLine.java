@@ -1,10 +1,10 @@
 package com.xspeedit;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * First simple algorithm described in the README file.
@@ -47,14 +47,23 @@ public class BasicBoxingLine implements BoxingLine {
 
     @Override
     public List<String> producedBoxes() {
-        return producedBoxes.stream()
-                .map(Box::toString)
-                .collect(Collectors.toList());
+        List<String> res = new ArrayList<>();
+        for (Box producedBox : producedBoxes) {
+            res.add(producedBox.toString());
+        }
+        return res;
     }
 
     @Override
     public String toString() {
-        return String.join ("/", producedBoxes());
+        StringBuilder builder = new StringBuilder();
+        for (String box : producedBoxes()) {
+            if (! builder.toString().equals("")) {
+                builder.append("/");
+            }
+            builder.append(box);
+        }
+        return builder.toString();
     }
 
     private Box currentBox;
