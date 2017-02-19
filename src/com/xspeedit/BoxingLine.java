@@ -8,6 +8,8 @@ public interface BoxingLine {
 
     boolean addElements(int... elements);
 
+    void close();
+
     List<String> producedBoxes();
 
 }

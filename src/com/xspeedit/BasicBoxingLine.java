@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
  */
 public class BasicBoxingLine implements BoxingLine {
 
-    public BasicBoxingLine() {
-        boxCapacity = 10;
-        producedBoxes = new LinkedHashSet<>();
+    public BasicBoxingLine(int boxCapacity) {
+        this.boxCapacity = boxCapacity;
+        this.producedBoxes = new LinkedHashSet<>();
+        this.currentBox = new Box(this.boxCapacity);
     }
 
     @Override
@@ -23,22 +24,25 @@ public class BasicBoxingLine implements BoxingLine {
 
     @Override
     public boolean addElements(int... elements) {
-        Box box = new Box(boxCapacity);
         for (int element : elements) {
             if (element > 9 || element < 1) {
                 throw new IllegalArgumentException(String.format("at least one element is not of correct size: %s",
                         element));
             }
-            boolean added = box.add(element);
+            boolean added = currentBox.add(element);
             if (! added) {
-                producedBoxes.add(box);
-                box = new Box(boxCapacity);
-                box.add(element);
+                producedBoxes.add(currentBox);
+                currentBox = new Box(boxCapacity);
+                currentBox.add(element);
             }
         }
-        producedBoxes.add(box);
 
         return true;
+    }
+
+    @Override
+    public void close() {
+        producedBoxes.add(currentBox);
     }
 
     @Override
@@ -52,6 +56,8 @@ public class BasicBoxingLine implements BoxingLine {
     public String toString() {
         return String.join ("/", producedBoxes());
     }
+
+    private Box currentBox;
 
     private final int boxCapacity;
 
