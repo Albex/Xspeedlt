@@ -33,3 +33,20 @@ Articles      : 163841689525773
 Robot actuel  : 163/8/41/6/8/9/52/5/7/73 => 10 cartons utilisés  
 Robot optimisé: 163/82/46/19/8/55/73/7   => 8  cartons utilisés
 ```
+
+Solution
+--------
+
+Le projet contient l'algorithme actuel du robot : ```BasicBoxingLine``` et un algorithme permettant d'optimiser la chaine : ```OptimizedBoxingLine```.  
+L'algorithme ne se permet pas de pouvoir mettre en attente la chaine, il ne peut pas connaitre tous les articles suivants mais seulement ceux qui sont dans le carton, celui qu'il est en train de traîter et un article en plus déjà passé mais toujours pas dans un carton.  
+Ces contraintes permettent de matérialiser la notion de flux que le robot traite : les articles arrivent au fur et à mesure sans qu'on puisse les connaitre.
+
+*Resultats de ```OptimizedBoxingLine```*
+```python
+Articles      : 163841689525773  
+Robot actuel  : 163/8/41/6/8/9/52/5/7/73 => 10 cartons utilisés  
+Robot optimisé: 163/46/19/8/55/28/73/7   => 8  cartons utilisés
+```
+L'algorithme obtient la même efficacité sur le nombre de cartons mais propose une organisation un peu différente du résultat d'exemple proposé : les cartons sont produits au moment où le dernier article mis dans le carton est scanné par le robot.  
+
+Les tests unitaires disponibles dans le projet permettent de vérifier ce résultat.
