@@ -84,6 +84,10 @@ public class OptimizedBoxingLine implements BoxingLine {
                 waitingElement = max(biggestInBox, element);
             } else if (currentBox.leftSpace() == 0) {
                 shipBox();
+                if (waitingElement != null) {
+                    currentBox.add(waitingElement);
+                    waitingElement = null;
+                }
             }
         }
     }
